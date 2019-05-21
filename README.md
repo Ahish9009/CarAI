@@ -2,11 +2,11 @@
 
 ## Metadata
 
-### 1. Circuit
+ 1. Circuit
 
 	- To enable detection of the obstacles(anything that is not the road), we allow for only the road to be of black color. Everything else(except the car) shall be treated as an obstacle. Using this, we can create the contour for the road which will be very useful
 
-### 2. Car
+ 2. Car
 	
 	- Maximum steering angle of the car is 60 degrees
 	- Direction of car will use normal cartesian system(angles measured from positive X-axis)
