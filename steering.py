@@ -36,6 +36,11 @@ def sgn(x):
     else:
         return x/abs(x)
 
+def getSpeedComps(spd, theta):
+    
+    return spd * math.cos( math.radians(theta) ), spd * math.sin( math.radians(theta) )
+
+
 def getNewSpeed(iDirAngle, iSpeedX, iSpeedY, abPedal, stAngle):
 
     acc = getAcDc(abPedal)
@@ -45,7 +50,10 @@ def getNewSpeed(iDirAngle, iSpeedX, iSpeedY, abPedal, stAngle):
     newSpeed = addSpeeds(oldSpeed, deltaSpeed)
     
     turnDirection = sgn(stAngle)
-    perpAngle = ( iDirAngle + (turnDirection*90) ) % 360
+    # perpAngle = ( iDirAngle + (turnDirection * 90) ) % 360 #angle perp to iDirAngle
+    
+    newDirAngle = iDirAngle + (turnDirection * stAngle)
+    newSpeedX, newSpeedY = getSpeedComps(newSpeed, newDirAngle)
     
 
     return (x,y)
