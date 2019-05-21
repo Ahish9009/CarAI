@@ -18,7 +18,7 @@ carSize = (10,20) #when car is facing upwards
 
 #loading the images
 car = pg.image.load("images/car.png")
-circuit = pg.image.load("images/circuit")
+circuit = pg.image.load("images/circuit.png")
 
 #scaling the images
 circuit = pg.transform.scale(circuit, screenSize)

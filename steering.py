@@ -24,7 +24,7 @@ def addSpeeds(a, b):
     toReturn = a + b
     if toReturn > speedMAX:
         return speedMAX
-    else if toReturn < 0:
+    elif toReturn < 0:
         return 0
     else:
         return toReturn
