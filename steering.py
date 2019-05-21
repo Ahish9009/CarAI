@@ -52,7 +52,7 @@ def getNewSpeed(iDirAngle, iSpeedX, iSpeedY, abPedal, stAngle, timeInterval = 0.
     turnDirection = sgn(stAngle)
     # perpAngle = ( iDirAngle + (turnDirection * 90) ) % 360 #angle perp to iDirAngle
     
-    newDirAngle = iDirAngle + (turnDirection * stAngle)
+    newDirAngle = iDirAngle - (stAngle)
     newSpeedX, newSpeedY = getSpeedComps(newSpeed, newDirAngle)
     
     return newDirAngle, newSpeedX, newSpeedY
