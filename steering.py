@@ -11,7 +11,7 @@ import math
 
 abMAX = 4
 speedMAX = 50;
-timeInterval = 0.1 #seconds
+# timeInterval = 0.1 seconds by default
 
 def getTotalSpeed(xSpeed, ySpeed):
     return math.sqrt( xSpeed**2 + ySpeed**2 )
@@ -41,7 +41,7 @@ def getSpeedComps(spd, theta):
     return spd * math.cos( math.radians(theta) ), spd * math.sin( math.radians(theta) )
 
 
-def getNewSpeed(iDirAngle, iSpeedX, iSpeedY, abPedal, stAngle):
+def getNewSpeed(iDirAngle, iSpeedX, iSpeedY, abPedal, stAngle, timeInterval = 0.1):
 
     acc = getAcDc(abPedal)
     
@@ -55,5 +55,5 @@ def getNewSpeed(iDirAngle, iSpeedX, iSpeedY, abPedal, stAngle):
     newDirAngle = iDirAngle + (turnDirection * stAngle)
     newSpeedX, newSpeedY = getSpeedComps(newSpeed, newDirAngle)
     
+    return newDirAngle, newSpeedX, newSpeedY
 
-    return (x,y)
