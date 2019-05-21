@@ -8,6 +8,7 @@
 
  2. Car
 	
+	- Accelerator pedal and break(negative accelerator) is controlled using the up and down keys, while steering wheel is controlled using L/R arrow keys 
 	- Maximum steering angle of the car is 60 degrees
 	- Direction of car will use normal cartesian system(angles measured from positive X-axis)
 	- Only the steering angle will be relative to the direction the car is moving in( Positive steering angle means car is turning to the right, and negative means car is turning to the left )

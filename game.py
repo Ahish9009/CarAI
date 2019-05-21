@@ -75,9 +75,12 @@ while looper:
     
     car = orgCar
     car = pg.transform.rotate(car, car1.dirAngle-90)
+
+    #blits images
     screen.blit(circuit, (0,0))
     screen.blit(car, (car1.x, car1.y))
     
+    #blits text
     screen.blit(abInfo, (0,30))
     screen.blit(SpeedInfo, (0,65))
     screen.blit(stInfo, (0, 100))
@@ -86,8 +89,6 @@ while looper:
     # car1.stAngle = -6
     # car1.xSpeed = 0.5
     # car1.ySpeed = 0.5
-    car1.updatePos()
-
 
     for event in pg.event.get():
 
@@ -106,6 +107,7 @@ while looper:
                 car1.stAngle -= 1
 
     clock.tick(10)
+    car1.updatePos()
     pg.display.update()
 
 pg.quit()
