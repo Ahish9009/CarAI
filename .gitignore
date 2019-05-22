@@ -3,3 +3,4 @@ __pycache__
 .game.py.swp
 .steering.py.swp
 .README.md.swp
+venv

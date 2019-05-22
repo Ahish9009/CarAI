@@ -74,6 +74,7 @@ while looper:
     abInfo = TNR30.render("abPedal: "+str(car1.abPedal), 1, BLACK)
     SpeedInfo = TNR30.render("Speed: "+str(car1.speed), 1, BLACK)
     stInfo = TNR30.render("Steering Angle: "+str(car1.stAngle), 1, BLACK)
+    fps = TNR30.render(f"{ clock.get_fps() }FPS", 1, BLACK)
    
     #rotates the original image of the car
     car = orgCar
@@ -87,6 +88,7 @@ while looper:
     screen.blit(abInfo, (0,30))
     screen.blit(SpeedInfo, (0,65))
     screen.blit(stInfo, (0, 100))
+    screen.blit(fps, (0, 575))
 
     # car1.abPedal = 1
     # car1.stAngle = -6
