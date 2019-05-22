@@ -1,2 +1,4 @@
 .DS_Store
 __pycache__
+.game.py.swp
+.steering.py.swp

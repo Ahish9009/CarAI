@@ -40,7 +40,6 @@ def getSpeedComps(spd, theta):
     
     return spd * math.cos( math.radians(theta) ), spd * math.sin( math.radians(theta) )
 
-
 def getNewSpeed(iDirAngle, iSpeedX, iSpeedY, abPedal, stAngle, timeInterval = 0.1):
 
     acc = getAcDc(abPedal)

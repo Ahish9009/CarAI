@@ -66,6 +66,8 @@ count = 0
 car1 = cars()
 orgCar = car
 
+oldT = pg.time.get_ticks()
+
 while looper:
     
     #gets the text to print
@@ -106,8 +108,16 @@ while looper:
             if event.key == pg.K_LEFT:
                 car1.stAngle -= 1
 
+    #sets max framerate
     clock.tick(10)
-    car1.updatePos()
+    
+    #updates the car's position
+    currT = pg.time.get_ticks()
+    deltaT = (currT - oldT)/1000
+    # print(deltaT)
+    car1.updatePos(deltaT)
+    oldT = pg.time.get_ticks()
+    
     pg.display.update()
 
 pg.quit()
