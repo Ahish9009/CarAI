@@ -74,7 +74,8 @@ while looper:
     abInfo = TNR30.render("abPedal: "+str(car1.abPedal), 1, BLACK)
     SpeedInfo = TNR30.render("Speed: "+str(car1.speed), 1, BLACK)
     stInfo = TNR30.render("Steering Angle: "+str(car1.stAngle), 1, BLACK)
-    
+   
+    #rotates the original image of the car
     car = orgCar
     car = pg.transform.rotate(car, car1.dirAngle-90)
     
