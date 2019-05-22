@@ -19,6 +19,8 @@ TNR30 = pg.font.SysFont("Times New Roman", 30)
 WHITE = (255,255,255)
 BLACK = (0,0,0)
 RED = (255,0,0)
+GREEN = (0,255,0)
+BLUE = (0,0,255)
 
 #sizes
 screenSize = (600,600)
@@ -84,7 +86,7 @@ while looper:
     stInfo = TNR30.render("Steering Angle: "+str(car1.stAngle), 1, BLACK)
     # fps = TNR30.render(f"{ clock.get_fps() }FPS", 1, BLACK)
    
-    #rotates the original image of the car
+    #rotates the original image of the car to reduce losses due to distortion
     car = orgCar
     car = pg.transform.rotate(car, car1.dirAngle-90)
     
@@ -99,7 +101,6 @@ while looper:
     # screen.blit(fps, (0, 575))
 
     #collects all the features
-
     if collect:
         features = ob.getFeatures(screen, car1, carSize, screenSize)
         allFeatures += [features]
@@ -113,7 +114,6 @@ while looper:
             
             if event.key == pg.K_c:
                 collect = not collect
-
             if event.key == pg.K_UP:
                 car1.abPedal += 0.5
             if event.key == pg.K_DOWN:

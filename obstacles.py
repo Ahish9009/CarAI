@@ -1,6 +1,12 @@
 import math
 import pygame as pg
 
+WHITE = (255,255,255)
+BLACK = (0,0,0)
+RED = (255,0,0)
+GREEN = (0,255,0)
+BLUE = (0,0,255)
+
 def getDistance(a, b):
 
     return math.sqrt( (a[0] - b[0])**2 + (a[1] - b[1])**2 )
@@ -74,10 +80,9 @@ def getFeatures(screen, car1, carSize, screenSize, show = 1):
     rightDistance = getDistance(carBumperPos, endPos5)
 
     if show:
-        pg.draw.line(screen, (0,0,255), carBumperPos, endPos1, 1)
-        pg.draw.line(screen, (0,0,255), carBumperPos, endPos2, 1)
-        pg.draw.line(screen, (0,0,255), carBumperPos, endPos3, 1)
-        pg.draw.line(screen, (0,0,255), carBumperPos, endPos4, 1)
-        pg.draw.line(screen, (0,0,255), carBumperPos, endPos5, 1)
-    
+        pg.draw.line(screen, GREEN, carBumperPos, endPos1, 1)
+        pg.draw.line(screen, GREEN, carBumperPos, endPos2, 1)
+        pg.draw.line(screen, GREEN, carBumperPos, endPos3, 1)
+        pg.draw.line(screen, GREEN, carBumperPos, endPos4, 1)
+        pg.draw.line(screen, GREEN, carBumperPos, endPos5, 1)
     return [ leftDistance, leftDiagonalDistance, frontDistance, rightDiagonalDistance, rightDistance, car1.speed, car1.abPedal, car1.stAngle ]
