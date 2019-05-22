@@ -29,7 +29,7 @@
 		7. Direction(?)
 		
 ## Plan
-	``` diff
+	```diff
 	+ (DONE) Deploy a method to get the necessary parameters for training
 	- (IN PROCESS) Collect data by driving the car yourself, and record what you do
 	- Train a model using the data you have, and then test
