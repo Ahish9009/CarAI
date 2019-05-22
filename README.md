@@ -28,8 +28,6 @@
 		6. Speed
 		7. Direction(?)
 		
-
-
 ## Plan
 
 	- (DONE) Deploy a method to get the necessary parameters for training
