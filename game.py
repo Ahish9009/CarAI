@@ -58,7 +58,7 @@ clock = pg.time.Clock()
 screen = pg.display.set_mode(screenSize)
 pg.display.set_caption("CarAI")
 
-#pygame loop
+#pg loop
 looper = True
 count = 0
 
@@ -77,11 +77,11 @@ while looper:
     
     car = orgCar
     car = pg.transform.rotate(car, car1.dirAngle-90)
-
+    
     #blits images
     screen.blit(circuit, (0,0))
-    screen.blit(car, (car1.x, car1.y))
-    
+    screen.blit(car, st.rotateCenter(car1, car))
+
     #blits text
     screen.blit(abInfo, (0,30))
     screen.blit(SpeedInfo, (0,65))

@@ -56,3 +56,8 @@ def getNewSpeed(iDirAngle, iSpeedX, iSpeedY, abPedal, stAngle, timeInterval = 0.
     
     return newDirAngle, newSpeedX, newSpeedY
 
+def rotateCenter(obj, rotatedImage):
+
+    r = rotatedImage.get_rect().center
+
+    return obj.x  - r[0], obj.y - r[1]
