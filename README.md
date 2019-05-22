@@ -15,6 +15,26 @@
 	- Maximum acceleration of the car is 4(dont know units, pixels/s^2?)
 	- Assume car decelerates at 1 pps(pixels/s^2) when no acceleration is applied
 
+3. Data Collection
+
+	- Draw out 5 lines from the car: 2 horizontal, 1 vertical, 2 diagonal
+	- Measure the distance to the nearest obstacle
+	- Features to be used:
+		1. Left Horizontal line
+		2. Right Horizontal line
+		3. Vertical line
+		4. Left diagonal line
+		5. Right diagonal line
+		6. Speed
+		7. Direction(?)
+		
+
+
+## Plan
+
+	- Deploy a method to get the necessary parameters for training
+	- Collect data by driving the car yourself, and record what you do
+	- Train a model using the data you have, and then test
 
 ## Issues
 
