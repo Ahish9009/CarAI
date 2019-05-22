@@ -18,4 +18,4 @@
 
 ## Issues
 
-	- Car turning animation isn't smooth possibly because car is positioned using top left corner of the car image	
+	- (FIXED) Car turning animation isn't smooth possibly because car is positioned using top left corner of the car image 	
