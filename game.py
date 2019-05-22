@@ -138,7 +138,7 @@ while looper:
 
 pg.quit()
 
-with open("features.csv", "a", newline='') as f:
+with open("data/features.csv", "a", newline='') as f:
 
     csvWriter = csv.writer(f, delimiter = ' ', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     for i in allFeatures:
