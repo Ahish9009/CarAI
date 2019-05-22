@@ -115,6 +115,7 @@ while looper:
     currT = pg.time.get_ticks()
     deltaT = (currT - oldT)/1000
     # print(deltaT)
+    # print(car1.x, car1.y)
     car1.updatePos(deltaT)
     oldT = pg.time.get_ticks()
     
