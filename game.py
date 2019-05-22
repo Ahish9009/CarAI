@@ -100,14 +100,36 @@ while looper:
     carCenterPos = ob.getCenter(car1, carSize) 
     
     #straight line
-    #front bumper of car
+    #middle of front bumper of car
     carBumperPos = ob.getBumper(car1, carSize, carCenterPos)
     #gets obstacle, finds distance  and draws the line
     endPos = ob.findObstacle(screen, carBumperPos, car1.dirAngle, screenSize)
     frontDistance = ob.getDistance(carBumperPos, endPos)
     pg.draw.line(screen, (0,0,255), carBumperPos, endPos, 1)
 
-    print(frontDistance)
+    #left horizontal line
+    leftAngle = (car1.dirAngle + 90) % 360
+    endPos = ob.findObstacle(screen, carBumperPos, leftAngle, screenSize)
+    leftDistance = ob.getDistance(carBumperPos, endPos)
+    pg.draw.line(screen, (0,0,255), carBumperPos, endPos, 1)
+
+    #left diagonal line
+    leftDiagonalAngle = (car1.dirAngle + 45) % 360
+    endPos = ob.findObstacle(screen, carBumperPos, leftDiagonalAngle, screenSize)
+    leftDiagonalDistance = ob.getDistance(carBumperPos, endPos)
+    pg.draw.line(screen, (0,0,255), carBumperPos, endPos, 1)
+   
+    #right diagonal line
+    rightDiagonalAngle = (car1.dirAngle - 45) % 360
+    endPos = ob.findObstacle(screen, carBumperPos, rightDiagonalAngle, screenSize)
+    rightDiagonalDistance = ob.getDistance(carBumperPos, endPos)
+    pg.draw.line(screen, (0,0,255), carBumperPos, endPos, 1)
+    
+    #right horizontal line
+    rightAngle = (car1.dirAngle - 90) % 360
+    endPos = ob.findObstacle(screen, carBumperPos, rightAngle, screenSize)
+    rightDistance = ob.getDistance(carBumperPos, endPos)
+    pg.draw.line(screen, (0,0,255), carBumperPos, endPos, 1)
 
     for event in pg.event.get():
 

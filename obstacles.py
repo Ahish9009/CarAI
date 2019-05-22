@@ -41,5 +41,3 @@ def findObstacle(screen, start, angle, screenSize):
         roundedCurrPos = [ round(currPos[0]), round(currPos[1]) ]
     
     return currPos
-
-
