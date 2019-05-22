@@ -9,6 +9,7 @@ import math
 
 #Globals
 
+NORM = 3
 abMAX = 4
 speedMAX = 50;
 # timeInterval = 0.1 seconds by default
@@ -44,14 +45,14 @@ def getNewSpeed(iDirAngle, iSpeedX, iSpeedY, abPedal, stAngle, timeInterval = 0.
 
     acc = getAcDc(abPedal)
     
-    deltaSpeed = acc*timeInterval
+    deltaSpeed = acc * timeInterval / NORM
     oldSpeed = getTotalSpeed(iSpeedX, iSpeedY)
     newSpeed = addSpeeds(oldSpeed, deltaSpeed)
     
     turnDirection = sgn(stAngle)
     # perpAngle = ( iDirAngle + (turnDirection * 90) ) % 360 #angle perp to iDirAngle
     
-    newDirAngle = iDirAngle - (stAngle)
+    newDirAngle = iDirAngle - (stAngle/NORM)
     newSpeedX, newSpeedY = getSpeedComps(newSpeed, newDirAngle)
     
     return newDirAngle, newSpeedX, newSpeedY
