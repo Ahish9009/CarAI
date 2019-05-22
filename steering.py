@@ -61,4 +61,5 @@ def rotateCenter(obj, rotatedImage):
 
     r = rotatedImage.get_rect().center
 
-    return obj.x  - r[0], obj.y - r[1]
+    return obj.x + 15 - r[0], obj.y + 30 - r[1]
+

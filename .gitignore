@@ -4,3 +4,4 @@ __pycache__
 .steering.py.swp
 .README.md.swp
 venv
+.obstacles.py.swp

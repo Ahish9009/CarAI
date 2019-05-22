@@ -1,6 +1,8 @@
 import pygame as pg
 import numpy as np
 import steering as st
+import obstacles as ob
+import math
 
 pg.init()
 
@@ -45,7 +47,7 @@ class cars:
 
 #loading the images
 car = pg.image.load("images/car.png")
-circuit = pg.image.load("images/circuit.png")
+circuit = pg.image.load("images/circuit1.png")
 
 #scaling the images
 circuit = pg.transform.scale(circuit, screenSize)
@@ -74,7 +76,7 @@ while looper:
     abInfo = TNR30.render("abPedal: "+str(car1.abPedal), 1, BLACK)
     SpeedInfo = TNR30.render("Speed: "+str(car1.speed), 1, BLACK)
     stInfo = TNR30.render("Steering Angle: "+str(car1.stAngle), 1, BLACK)
-    fps = TNR30.render(f"{ clock.get_fps() }FPS", 1, BLACK)
+    # fps = TNR30.render(f"{ clock.get_fps() }FPS", 1, BLACK)
    
     #rotates the original image of the car
     car = orgCar
@@ -84,16 +86,28 @@ while looper:
     screen.blit(circuit, (0,0))
     screen.blit(car, st.rotateCenter(car1, car))
 
+    #testing
+    # pg.draw.rect(screen, (0,255,0), (car1.x, car1.y, carSize[0], carSize[1]), 1)
+
     #blits text
     screen.blit(abInfo, (0,30))
     screen.blit(SpeedInfo, (0,65))
     screen.blit(stInfo, (0, 100))
-    screen.blit(fps, (0, 575))
+    # screen.blit(fps, (0, 575))
 
-    # car1.abPedal = 1
-    # car1.stAngle = -6
-    # car1.xSpeed = 0.5
-    # car1.ySpeed = 0.5
+    #to draw the 5 lines out of the car
+    
+    carCenterPos = ob.getCenter(car1, carSize) 
+    
+    #straight line
+    #front bumper of car
+    carBumperPos = ob.getBumper(car1, carSize, carCenterPos)
+    #gets obstacle, finds distance  and draws the line
+    endPos = ob.findObstacle(screen, carBumperPos, car1.dirAngle, screenSize)
+    frontDistance = ob.getDistance(carBumperPos, endPos)
+    pg.draw.line(screen, (0,0,255), carBumperPos, endPos, 1)
+
+    print(frontDistance)
 
     for event in pg.event.get():
 
