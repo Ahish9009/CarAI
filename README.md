@@ -33,7 +33,8 @@
 - (**Done**) Deploy a method to get the necessary parameters for training
 - (***In Progress***) Collect data by driving the car yourself, and record what you do
 - Train a model using the data you have, and then test
+
 ## Issues
 
-	- Gradient for car's general movement is too steep
-	- (FIXED) Car turning animation isn't smooth possibly because car is positioned using top left corner of the car image 	
+- Gradient for car's general movement is too steep
+- (**Fixed**) Car turning animation isn't smooth possibly because car is positioned using top left corner of the car image 	

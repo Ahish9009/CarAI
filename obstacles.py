@@ -80,4 +80,4 @@ def getFeatures(screen, car1, carSize, screenSize, show = 1):
         pg.draw.line(screen, (0,0,255), carBumperPos, endPos4, 1)
         pg.draw.line(screen, (0,0,255), carBumperPos, endPos5, 1)
     
-    return [ leftDistance, leftDiagonalDistance, frontDistance, rightDiagonalDistance, rightDistance, car1.speed ]
+    return [ leftDistance, leftDiagonalDistance, frontDistance, rightDiagonalDistance, rightDistance, car1.speed, car1.abPedal, car1.stAngle ]

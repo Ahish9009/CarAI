@@ -2,12 +2,15 @@ import pygame as pg
 import numpy as np
 import steering as st
 import obstacles as ob
-import math
+import math, csv
 
 pg.init()
 
 #global variables
 #--------------------------------------------
+
+#stores all collected features
+allFeatures = []
 
 #text
 TNR30 = pg.font.SysFont("Times New Roman", 30)
@@ -70,6 +73,9 @@ orgCar = car
 
 oldT = pg.time.get_ticks()
 
+#variable for collecting features
+collect = False
+
 while looper:
     
     #gets the text to print
@@ -93,7 +99,10 @@ while looper:
     # screen.blit(fps, (0, 575))
 
     #collects all the features
-    features = ob.getFeatures(screen, car1, carSize, screenSize)
+
+    if collect:
+        features = ob.getFeatures(screen, car1, carSize, screenSize)
+        allFeatures += [features]
 
     for event in pg.event.get():
 
@@ -101,6 +110,9 @@ while looper:
             looper = False
 
         if event.type == pg.KEYDOWN:
+            
+            if event.key == pg.K_c:
+                collect = not collect
 
             if event.key == pg.K_UP:
                 car1.abPedal += 0.5
@@ -125,6 +137,14 @@ while looper:
     pg.display.update()
 
 pg.quit()
+
+with open("features.csv", "a", newline='') as f:
+
+    csvWriter = csv.writer(f, delimiter = ' ', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+    for i in allFeatures:
+        csvWriter.writerow(i)
+
+
 
 
 
