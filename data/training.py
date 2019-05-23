@@ -57,8 +57,8 @@ for i in range(len(allData)):
     for j in range(nFeatures, nFeatures + nOutput):
         Y[i][j - nFeatures] = allData[i][j]
 
-nIterations = 230
-alpha = (0.0001+0.00001)/2
+nIterations = 5
+alpha = 0.00001
 
 toPlotY1 = []
 toPlotY2 = []
@@ -82,12 +82,17 @@ while i < nIterations:
         cont = input()
         print(cont)
         if cont == '':
-            nIterations += 10
+            nIterations += 100
     
     i+=1
 
-np.savetxt("model8.csv", theta, delimiter = ',')
+np.savetxt("model13.csv", theta, delimiter = ',')
 
+#normal method
+# new = np.linalg.inv((np.matrix.transpose(X)).dot(X)).dot(np.matrix.transpose(X).dot(Y))
+# print(new)
+# print(costFunction(X, Y, new))
+# np.savetxt("normalModel1.csv", new, delimiter = ',')
 
 print(cost)
 print(theta)

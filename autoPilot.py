@@ -1,7 +1,7 @@
 import numpy as np
 import csv
 
-tempTheta = list(csv.reader(open("data/model8.csv")))
+tempTheta = list(csv.reader(open("data/normalModel1.csv")))
 
 theta = np.zeros((len(tempTheta), len(tempTheta[0])))
 for i in range(len(tempTheta)):
