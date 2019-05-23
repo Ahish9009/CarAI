@@ -5,3 +5,5 @@ __pycache__
 .README.md.swp
 venv
 .obstacles.py.swp
+.autoPilot.py.swp
+.training.py.swp

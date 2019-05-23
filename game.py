@@ -2,6 +2,7 @@ import pygame as pg
 import numpy as np
 import steering as st
 import obstacles as ob
+import autoPilot as ap
 import math, csv
 
 pg.init()
@@ -52,7 +53,7 @@ class cars:
 
 #loading the images
 car = pg.image.load("images/car.png")
-circuit = pg.image.load("images/circuit4.png")
+circuit = pg.image.load("images/circuit2.png")
 
 #scaling the images
 circuit = pg.transform.scale(circuit, screenSize)
@@ -77,6 +78,7 @@ oldT = pg.time.get_ticks()
 
 #variable for collecting features
 collect = False
+autoPilot = False
 
 while looper:
     
@@ -104,6 +106,12 @@ while looper:
     if collect:
         features = ob.getFeatures(screen, car1, carSize, screenSize)
         allFeatures += [features]
+    
+    if autoPilot:
+        
+        features = ob.getFeatures(screen, car1, carSize, screenSize)
+        car1.abPedal, car1.stAngle = ap.drive(features[:6])
+        # print(car1.abPedal)
 
     for event in pg.event.get():
 
@@ -111,7 +119,9 @@ while looper:
             looper = False
 
         if event.type == pg.KEYDOWN:
-            
+           
+            if event.key == pg.K_a:
+                autoPilot = not autoPilot
             if event.key == pg.K_c:
                 collect = not collect
             if event.key == pg.K_UP:

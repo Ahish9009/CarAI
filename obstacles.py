@@ -36,7 +36,7 @@ def isObstacle(color):
 def findObstacle(screen, start, angle, screenSize):
 
     currPos = [start[0], start[1]]
-    roundedCurrPos = [round(start[0]), round(start[1])]
+    roundedCurrPos = [int(round(start[0])), int(round(start[1]))]
     while isValid(currPos, screenSize):
         
         currCol = screen.get_at(roundedCurrPos)
@@ -45,7 +45,7 @@ def findObstacle(screen, start, angle, screenSize):
 
         currPos[0] += math.cos(math.radians(angle))
         currPos[1] -= math.sin(math.radians(angle))
-        roundedCurrPos = [ round(currPos[0]), round(currPos[1]) ]
+        roundedCurrPos = [ int(round(currPos[0])), int(round(currPos[1])) ]
     
     return currPos
 
