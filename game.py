@@ -140,7 +140,7 @@ pg.quit()
 
 with open("data/features.csv", "a", newline='') as f:
 
-    csvWriter = csv.writer(f, delimiter = ' ', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+    csvWriter = csv.writer(f, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     for i in allFeatures:
         csvWriter.writerow(i)
 
