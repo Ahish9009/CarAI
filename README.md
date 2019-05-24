@@ -46,9 +46,9 @@
 - (**Done**) Deploy a method to get the necessary parameters for training
 - (**Done**) Collect data by driving the car yourself, and record what you do
 - (***In Progress***) Train a model using the data you have, and then test
-	-> (**Done**) Linear Regression
-	-> Logistic Regression
-	-> Neural Network
+	1. (**Done**) Linear Regression
+	2. Logistic Regression
+	3. Neural Network
 
 ## Issues
 
