@@ -13,8 +13,11 @@ for i in range(len(tempTheta)):
 
 def normalize(x):
 
-    for j in range(6):
-        x[j]/=600
+    for j in range(9):
+        x[j]/=300.
+    x[9]/=30.
+
+    # print(x)
     return x
 
 def drive(x):
