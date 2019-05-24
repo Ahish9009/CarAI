@@ -25,17 +25,30 @@
 		3. Vertical line
 		4. Left diagonal line
 		5. Right diagonal line
-		6. Speed
-		7. Direction(?)
+		6. Left 67.25 line
+		7. Right 67.25 line
+		8. Left 22.25 line
+		9. Right 22.25 line
+		10. Speed
+		11. Direction(?)
 	- When ready to start collecting data(ie. car is in the right position), press c to enable data collection
 	- Use 'c' to toggle the collection of data
 	- Once you are done collecting data for the session, close the pygame session, and the new data collected will be appended automatically	
 
+4. **Models**
+	
+	- Hybrid models are models that combine the values found in different models to produce a better model
+	- Currently, linear regression using 5, 7 and 11 features has been tested out.
+	- The best performing model is the 11 features hybrid2 model.
+
 ## Plan
 
 - (**Done**) Deploy a method to get the necessary parameters for training
-- (***In Progress***) Collect data by driving the car yourself, and record what you do
-- Train a model using the data you have, and then test
+- (**Done**) Collect data by driving the car yourself, and record what you do
+- (***In Progress***) Train a model using the data you have, and then test
+-> (**Done**) Linear Regression
+-> Logistic Regression
+-> Neural Network
 
 ## Issues
 
