@@ -36,7 +36,8 @@
 	- Once you are done collecting data for the session, close the pygame session, and the new data collected will be appended automatically	
 
 4. **Models**
-	
+
+	- The model currently chosen can be activated/deactivated using the 'a' key
 	- Hybrid models are models that combine the values found in different models to produce a better model
 	- Currently, linear regression using 5, 7 and 11 features has been tested out.
 	- The best performing model is the **11 features hybrid2** model.
