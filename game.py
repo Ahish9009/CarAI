@@ -53,7 +53,7 @@ class cars:
 
 #loading the images
 car = pg.image.load("images/car.png")
-circuit = pg.image.load("images/circuit2.png")
+circuit = pg.image.load("images/circuit1.png")
 
 #scaling the images
 circuit = pg.transform.scale(circuit, screenSize)
@@ -104,13 +104,13 @@ while looper:
 
     #collects all the features
     if collect:
-        features = ob.getFeatures(screen, car1, carSize, screenSize)
+        features = ob.get11Features(screen, car1, carSize, screenSize)
         allFeatures += [features]
     
     if autoPilot:
         
-        features = ob.getFeatures(screen, car1, carSize, screenSize)
-        car1.abPedal, car1.stAngle = ap.drive(features[:6])
+        features = ob.get11Features(screen, car1, carSize, screenSize)
+        car1.abPedal, car1.stAngle = ap.drive(features[:11])
         # print(car1.abPedal)
 
     for event in pg.event.get():
@@ -135,7 +135,7 @@ while looper:
 
     #sets max framerate
     clock.tick(10)
-    
+
     #updates the car's position
     currT = pg.time.get_ticks()
     deltaT = (currT - oldT)/1000
@@ -148,7 +148,7 @@ while looper:
 
 pg.quit()
 
-with open("data/features.csv", "a", newline='') as f:
+with open("data11Features/features.csv", "a", newline='') as f:
 
     csvWriter = csv.writer(f, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     for i in allFeatures:

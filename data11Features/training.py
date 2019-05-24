@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math, csv
 
-nFeatures = 6
+nFeatures = 11  
 nOutput = 2
 
 def costFunction(x, y, theta):
@@ -49,7 +49,7 @@ allData = list(csv.reader(open("features.csv")))
 
 X = np.zeros((len(allData), nFeatures))
 Y = np.zeros((len(allData), nOutput))
-theta = np.random.uniform(low = -2, high = 2, size = (nFeatures, nOutput))
+theta = np.random.uniform(low = -3, high = 3, size = (nFeatures, nOutput))
 
 for i in range(len(allData)):
     for j in range(nFeatures):
@@ -57,8 +57,9 @@ for i in range(len(allData)):
     for j in range(nFeatures, nFeatures + nOutput):
         Y[i][j - nFeatures] = allData[i][j]
 
-nIterations = 5
-alpha = 0.00001
+nIterations = 100
+# alpha = (  0.00001 + 0.0001 ) /2
+alpha= 0.0001/2
 
 toPlotY1 = []
 toPlotY2 = []
@@ -86,13 +87,13 @@ while i < nIterations:
     
     i+=1
 
-np.savetxt("model13.csv", theta, delimiter = ',')
+np.savetxt("model5.csv", theta, delimiter = ',')
 
-#normal method
+# normal method
 # new = np.linalg.inv((np.matrix.transpose(X)).dot(X)).dot(np.matrix.transpose(X).dot(Y))
 # print(new)
 # print(costFunction(X, Y, new))
-# np.savetxt("normalModel1.csv", new, delimiter = ',')
+# np.savetxt("normalModel2.csv", new, delimiter = ',')
 
 print(cost)
 print(theta)
