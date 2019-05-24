@@ -39,7 +39,7 @@
 	
 	- Hybrid models are models that combine the values found in different models to produce a better model
 	- Currently, linear regression using 5, 7 and 11 features has been tested out.
-	- The best performing model is the 11 features hybrid2 model.
+	- The best performing model is the **11 features hybrid2** model.
 
 ## Plan
 
