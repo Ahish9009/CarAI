@@ -3,6 +3,7 @@ import numpy as np
 import steering as st
 import obstacles as ob
 import autoPilot as ap
+import autoPilot2 as ap2
 import math, csv
 
 pg.init()
@@ -53,7 +54,7 @@ class cars:
 
 #loading the images
 car = pg.image.load("images/car.png")
-circuit = pg.image.load("images/circuit1.png")
+circuit = pg.image.load("images/circuit3.png")
 
 #scaling the images
 circuit = pg.transform.scale(circuit, screenSize)
@@ -110,7 +111,7 @@ while looper:
     if autoPilot:
         
         features = ob.get11Features(screen, car1, carSize, screenSize)
-        car1.abPedal, car1.stAngle = ap.drive(features[:11])
+        car1.abPedal, car1.stAngle = ap2.drive(features[:11])
         # print(car1.abPedal)
 
     for event in pg.event.get():
@@ -148,7 +149,7 @@ while looper:
 
 pg.quit()
 
-with open("data11Features/features.csv", "a", newline='') as f:
+with open("data31Features/features.csv", "a", newline='') as f:
 
     csvWriter = csv.writer(f, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     for i in allFeatures:
