@@ -54,7 +54,7 @@ class cars:
 
 #loading the images
 car = pg.image.load("images/car.png")
-circuit = pg.image.load("images/circuit3.png")
+circuit = pg.image.load("images/circuit1.png")
 
 #scaling the images
 circuit = pg.transform.scale(circuit, screenSize)

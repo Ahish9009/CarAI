@@ -3,7 +3,7 @@ import csv
 
 nFeatures = 11
 
-tempTheta = list(csv.reader(open("data11Features/hybrid2.csv")))
+tempTheta = list(csv.reader(open("data31Features/normalModel4.csv")))
 
 theta = np.zeros((len(tempTheta), len(tempTheta[0])))
 for i in range(len(tempTheta)):

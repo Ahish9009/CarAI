@@ -7,3 +7,5 @@ venv
 .obstacles.py.swp
 .autoPilot.py.swp
 .training.py.swp
+.autoPilot2.py.swp
+.training2.py.swp

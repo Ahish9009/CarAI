@@ -121,7 +121,7 @@ estimated = X.dot(theta)
 new = np.linalg.inv((np.matrix.transpose(X)).dot(X)).dot(np.matrix.transpose(X).dot(Y))
 print(new)
 print(costFunction(X, Y, new))
-np.savetxt("normalModel3.csv", new, delimiter = ',')
+np.savetxt("normalModel8.csv", new, delimiter = ',')
 
 # print(cost)
 # print(theta)
