@@ -17,7 +17,7 @@
 
 3. **Data Collection**
 
-	- Draw out 5 lines from the car: 2 horizontal, 1 vertical, 2 diagonal
+	- Draw out 9 lines from the car: 2 horizontal, 1 vertical, 2 diagonal
 	- Measure the distance to the nearest obstacle
 	- Features to be used:
 		1. Left Horizontal line
