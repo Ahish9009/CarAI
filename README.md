@@ -49,7 +49,7 @@
 - (***In Progress***) Train a model using the data you have, and then test
 	1. (**Done**) Linear Regression
 	2. Logistic Regression
-	3. Neural Network(TensorFlow)
+	3. (***In Progress***) Neural Network(TensorFlow)
 
 ## Issues
 
