@@ -31,7 +31,7 @@
 		9. Right 22.25 line
 		10. Speed
 		11. Direction
-	- When ready to start collecting data(ie. car is in the right position), press c to enable data collection
+	- When ready to start collecting data(ie. car is in the right position), press 'c' to enable data collection
 	- Use 'c' to toggle the collection of data
 	- Once you are done collecting data for the session, close the pygame session, and the new data collected will be appended automatically	
 
