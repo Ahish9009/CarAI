@@ -4,6 +4,7 @@ import steering as st
 import obstacles as ob
 import autoPilot as ap
 import autoPilot2 as ap2
+import tfAutoPilot as tfap
 import math, csv
 
 pg.init()
@@ -111,7 +112,7 @@ while looper:
     if autoPilot:
         
         features = ob.get11Features(screen, car1, carSize, screenSize)
-        car1.abPedal, car1.stAngle = ap2.drive(features[:11])
+        car1.abPedal, car1.stAngle = tfap.drive(features[:11])
         # print(car1.abPedal)
 
     for event in pg.event.get():
