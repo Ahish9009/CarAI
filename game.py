@@ -9,6 +9,11 @@ import math, csv
 
 pg.init()
 
+#-------------------------------------------
+modelPath = "tensorFlow"
+nFeatures = 11
+#-------------------------------------------
+
 #global variables
 #--------------------------------------------
 
@@ -111,9 +116,19 @@ while looper:
     
     if autoPilot:
         
-        features = ob.get11Features(screen, car1, carSize, screenSize)
-        car1.abPedal, car1.stAngle = tfap.drive(features[:11])
-        # print(car1.abPedal)
+        if nFeatures == 11 or nFeatures == 31:
+            features = ob.get11Features(screen, car1, carSize, screenSize)
+            if model == "tensorFlow":
+                car1.abPedal, car1.stAngle = tfap.drive(features[:11])
+            elif nFeatures == 31:
+                car1.abPedal, car1.stAngle = ap2.drive(features[:11])
+            else:
+                car1.abPedal, car1.stAngle = ap.drive(features[:11])
+                
+
+        if nFeatures == 7:
+            features = ob.get7Features(screen, car1, carSize, screenSize)
+            car1.abPedal, car1.stAngle = tfap.drive(features[:11])
 
     for event in pg.event.get():
 
@@ -150,7 +165,7 @@ while looper:
 
 pg.quit()
 
-with open("data31Features/features.csv", "a", newline='') as f:
+with open("trainingData/tensorFlow/data.csv", "a", newline='') as f:
 
     csvWriter = csv.writer(f, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
     for i in allFeatures:
