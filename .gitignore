@@ -10,3 +10,4 @@ venv
 .autoPilot2.py.swp
 .training2.py.swp
 usedKeys
+.tfAutoPilot.py.swp

@@ -10,7 +10,7 @@ import math, csv
 pg.init()
 
 #-------------------------------------------
-modelPath = "tensorFlow"
+model = "tensorFlow"
 nFeatures = 11
 #-------------------------------------------
 
