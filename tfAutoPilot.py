@@ -2,7 +2,7 @@ import tensorflow as tf
 import pandas as pd
 import numpy as np
 
-modelNo = 1
+modelNo = 3
 
 def multilayerPerceptron(x, weights, biases, keep_prob):
     layer1 = tf.add( tf.matmul(x, weights['h1']), biases['b1'] )
@@ -13,7 +13,7 @@ def multilayerPerceptron(x, weights, biases, keep_prob):
     
     return outLayer
 
-nH1 = 10
+nH1 = 50
 nInput = 11
 nOutput = 1
 
