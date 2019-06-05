@@ -2,8 +2,8 @@ import tensorflow as tf
 import pandas as pd
 import numpy as np
 
-modelNo = 11
-nH1 = 3
+modelNo = 12
+nH1 = 5
 nInput = 11
 nOutput = 1
 
