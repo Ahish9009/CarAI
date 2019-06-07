@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 
 modelNo = 14
-nH1 = 5
+nH1 = 7
 nInput = 11
 nOutput = 1
 
