@@ -80,13 +80,15 @@ def getNdistances(screen, car, carSize, screenSize, show=1, n=7):
 
 
 def get5Features(screen, car1, carSize, screenSize, show=1):
-    return [ getNdistances(screen, car1, carSize, screenSize, n=5), car1.speed, car1.abPedal, car1.stAngle ]
+    return [ *getNdistances(screen, car1, carSize, screenSize, n=5), car1.speed, car1.abPedal, car1.stAngle ]
 
 
 def get7Features(screen, car1, carSize, screenSize, show=1):
-    return [ getNdistances(screen, car1, carSize, screenSize, n=7), car1.speed, car1.abPedal, car1.stAngle ]
+    return [ *getNdistances(screen, car1, carSize, screenSize, n=7), car1.speed, car1.abPedal, car1.stAngle ]
 
 
 def get11Features(screen, car1, carSize, screenSize, show=1):
-    return [ getNdistances(screen, car1, carSize, screenSize, n=9), car1.speed, direction, car1.abPedal, car1.stAngle ]
+    direction = sgn(car1.dirAngle)
+
+    return [ *getNdistances(screen, car1, carSize, screenSize, n=9), car1.speed, direction, car1.abPedal, car1.stAngle ]
 
