@@ -4,13 +4,15 @@ import steering as st
 import obstacles as ob
 import autoPilot as ap
 import autoPilot2 as ap2
+import autoPilot3 as ap3
 import tfAutoPilot as tfap
 import math, csv
 
 pg.init()
 
 #-------------------------------------------
-model = "tensorFlow"
+# model = "tensorFlow"
+model = "test"
 nFeatures = 11
 #-------------------------------------------
 
@@ -118,8 +120,15 @@ while looper:
         
         if nFeatures == 11 or nFeatures == 31:
             features = ob.get11Features(screen, car1, carSize, screenSize)
+
+            # added for model test
+            _9distances = ob.getNdistances(screen, car1, carSize, screenSize, n=9)
+            isOnRoad = ob.isOnRoad(screen, screenSize, car1, carSize)
+
             if model == "tensorFlow":
                 car1.abPedal, car1.stAngle = tfap.drive(features[:11])
+            elif model == "test":
+                car1.abPedal, car1.stAngle = ap3.drive(_9distances, car1.abPedal, car1.stAngle, car1.speed, isOnRoad)
             elif nFeatures == 31:
                 car1.abPedal, car1.stAngle = ap2.drive(features[:11])
             else:
