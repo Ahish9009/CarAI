@@ -1,5 +1,6 @@
 import math
 import pygame as pg
+import numpy as np
 
 WHITE = (255,255,255)
 BLACK = (0,0,0)
@@ -9,7 +10,7 @@ BLUE = (0,0,255)
 
 def sgn(x):
 
-    if ( x==0 ):
+    if x == 0:
         return 0
     return x/abs(x)
 
@@ -55,154 +56,39 @@ def findObstacle(screen, start, angle, screenSize):
     
     return currPos
 
-def get5Features(screen, car1, carSize, screenSize, show = 1):
-    ##to draw the 5 lines out of the car
-    carCenterPos = getCenter(car1, carSize) 
-    carBumperPos = getBumper(car1, carSize, carCenterPos)
-    
-    #left horizontal line
-    leftAngle = (car1.dirAngle + 90) % 360
-    endPos1 = findObstacle(screen, carBumperPos, leftAngle, screenSize)
-    leftDistance = getDistance(carBumperPos, endPos1)
 
-    #left diagonal line
-    leftDiagonalAngle = (car1.dirAngle + 45) % 360
-    endPos2 = findObstacle(screen, carBumperPos, leftDiagonalAngle, screenSize)
-    leftDiagonalDistance = getDistance(carBumperPos, endPos2)
-   
-    #straight line
-    #gets obtacle, finds distance  and draws the line
-    endPos3 = findObstacle(screen, carBumperPos, car1.dirAngle, screenSize)
-    frontDistance = getDistance(carBumperPos, endPos3)
-    
-    #right diagonal line
-    rightDiagonalAngle = (car1.dirAngle - 45) % 360
-    endPos4 = findObstacle(screen, carBumperPos, rightDiagonalAngle, screenSize)
-    rightDiagonalDistance = getDistance(carBumperPos, endPos4)
-    
-    #right horizontal line
-    rightAngle = (car1.dirAngle - 90) % 360
-    endPos5 = findObstacle(screen, carBumperPos, rightAngle, screenSize)
-    rightDistance = getDistance(carBumperPos, endPos5)
+def getNdistances(screen, car, carSize, screenSize, show=1, n=7):
+    carCenterPos = getCenter(car, carSize)
+    carBumperPos = getBumper(car, carSize, carCenterPos)
+
+    # Asserting min 3 distances: left, right, front
+    assert n >= 3
+
+    # if n is odd, it will contain the straight line else, it won't
+    angles = (np.linspace(-90, 90, n) + car.dirAngle) % 360
+    # with the angles, find the end position
+    endPos = list(map(lambda angle: findObstacle(screen, carBumperPos, angle, screenSize), angles))
+    # using the end position [nearest obstacle], calculate the distance
+    n_distances = list(map(lambda pos: getDistance(carBumperPos, pos), endPos))
 
     if show:
-        pg.draw.line(screen, GREEN, carBumperPos, endPos1, 1)
-        pg.draw.line(screen, GREEN, carBumperPos, endPos2, 1)
-        pg.draw.line(screen, GREEN, carBumperPos, endPos3, 1)
-        pg.draw.line(screen, GREEN, carBumperPos, endPos4, 1)
-        pg.draw.line(screen, GREEN, carBumperPos, endPos5, 1)
-    return [ leftDistance, leftDiagonalDistance, frontDistance, rightDiagonalDistance, rightDistance, car1.speed, car1.abPedal, car1.stAngle ]
+        # draw the lines
+        for pos in endPos:
+            pg.draw.line(screen, GREEN, carBumperPos, pos, 1)
 
-def get7Features(screen, car1, carSize, screenSize, show = 1):
-    ##to draw the 5 lines out of the car
-    carCenterPos = getCenter(car1, carSize) 
-    carBumperPos = getBumper(car1, carSize, carCenterPos)
-    
-    #left horizontal line
-    leftAngle = (car1.dirAngle + 90) % 360
-    endPos1 = findObstacle(screen, carBumperPos, leftAngle, screenSize)
-    leftDistance = getDistance(carBumperPos, endPos1)
+    return n_distances
 
-    #left diagonal line
-    leftDiagonalAngle = (car1.dirAngle + 45) % 360
-    endPos2 = findObstacle(screen, carBumperPos, leftDiagonalAngle, screenSize)
-    leftDiagonalDistance = getDistance(carBumperPos, endPos2)
-   
-    #straight line
-    #gets obtacle, finds distance  and draws the line
-    endPos3 = findObstacle(screen, carBumperPos, car1.dirAngle, screenSize)
-    frontDistance = getDistance(carBumperPos, endPos3)
-    
-    #right diagonal line
-    rightDiagonalAngle = (car1.dirAngle - 45) % 360
-    endPos4 = findObstacle(screen, carBumperPos, rightDiagonalAngle, screenSize)
-    rightDiagonalDistance = getDistance(carBumperPos, endPos4)
-    
-    #right horizontal line
-    rightAngle = (car1.dirAngle - 90) % 360
-    endPos5 = findObstacle(screen, carBumperPos, rightAngle, screenSize)
-    rightDistance = getDistance(carBumperPos, endPos5)
 
-    #right 67.5  line
-    right67Angle = (car1.dirAngle - 67.5) % 360
-    endPos6 = findObstacle(screen, carBumperPos, right67Angle, screenSize)
-    right67Distance = getDistance(carBumperPos, endPos6)
-    
-    #left 67.5 line
-    left67Angle = (car1.dirAngle + 67.5) % 360
-    endPos7 = findObstacle(screen, carBumperPos, left67Angle, screenSize)
-    left67Distance = getDistance(carBumperPos, endPos7)
+def get5Features(screen, car1, carSize, screenSize, show=1):
+    return [ *getNdistances(screen, car1, carSize, screenSize, n=5), car1.speed, car1.abPedal, car1.stAngle ]
 
-    if show:
-        pg.draw.line(screen, GREEN, carBumperPos, endPos1, 1)
-        pg.draw.line(screen, GREEN, carBumperPos, endPos2, 1)
-        pg.draw.line(screen, GREEN, carBumperPos, endPos3, 1)
-        pg.draw.line(screen, GREEN, carBumperPos, endPos4, 1)
-        pg.draw.line(screen, GREEN, carBumperPos, endPos5, 1)
-        pg.draw.line(screen, GREEN, carBumperPos, endPos6, 1)
-        pg.draw.line(screen, GREEN, carBumperPos, endPos7, 1)
-    return [ leftDistance, leftDiagonalDistance, frontDistance, rightDiagonalDistance, rightDistance, left67Distance, right67Distance, car1.speed, car1.abPedal, car1.stAngle ]
 
-def get11Features(screen, car1, carSize, screenSize, show = 1):
-    ##to draw the 5 lines out of the car
-    carCenterPos = getCenter(car1, carSize) 
-    carBumperPos = getBumper(car1, carSize, carCenterPos)
-    
-    #left horizontal line
-    leftAngle = (car1.dirAngle + 90) % 360
-    endPos1 = findObstacle(screen, carBumperPos, leftAngle, screenSize)
-    leftDistance = getDistance(carBumperPos, endPos1)
+def get7Features(screen, car1, carSize, screenSize, show=1):
+    return [ *getNdistances(screen, car1, carSize, screenSize, n=7), car1.speed, car1.abPedal, car1.stAngle ]
 
-    #left diagonal line
-    leftDiagonalAngle = (car1.dirAngle + 45) % 360
-    endPos2 = findObstacle(screen, carBumperPos, leftDiagonalAngle, screenSize)
-    leftDiagonalDistance = getDistance(carBumperPos, endPos2)
-   
-    #straight line
-    #gets obtacle, finds distance  and draws the line
-    endPos3 = findObstacle(screen, carBumperPos, car1.dirAngle, screenSize)
-    frontDistance = getDistance(carBumperPos, endPos3)
-    
-    #right diagonal line
-    rightDiagonalAngle = (car1.dirAngle - 45) % 360
-    endPos4 = findObstacle(screen, carBumperPos, rightDiagonalAngle, screenSize)
-    rightDiagonalDistance = getDistance(carBumperPos, endPos4)
-    
-    #right horizontal line
-    rightAngle = (car1.dirAngle - 90) % 360
-    endPos5 = findObstacle(screen, carBumperPos, rightAngle, screenSize)
-    rightDistance = getDistance(carBumperPos, endPos5)
 
-    #right 67.5  line
-    right67Angle = (car1.dirAngle - 67.5) % 360
-    endPos6 = findObstacle(screen, carBumperPos, right67Angle, screenSize)
-    right67Distance = getDistance(carBumperPos, endPos6)
-    
-    #left 67.5 line
-    left67Angle = (car1.dirAngle + 67.5) % 360
-    endPos7 = findObstacle(screen, carBumperPos, left67Angle, screenSize)
-    left67Distance = getDistance(carBumperPos, endPos7)
-
-    #left 67.5 line
-    left22Angle = (car1.dirAngle + 22.5) % 360
-    endPos8 = findObstacle(screen, carBumperPos, left22Angle, screenSize)
-    left22Distance = getDistance(carBumperPos, endPos8)
-
-    #right 22.5 line
-    right22Angle = (car1.dirAngle - 22.5) % 360
-    endPos9 = findObstacle(screen, carBumperPos, right22Angle, screenSize)
-    right22Distance = getDistance(carBumperPos, endPos9)
-
+def get11Features(screen, car1, carSize, screenSize, show=1):
     direction = sgn(car1.dirAngle)
 
-    if show:
-        pg.draw.line(screen, GREEN, carBumperPos, endPos1, 1)
-        pg.draw.line(screen, GREEN, carBumperPos, endPos2, 1)
-        pg.draw.line(screen, GREEN, carBumperPos, endPos3, 1)
-        pg.draw.line(screen, GREEN, carBumperPos, endPos4, 1)
-        pg.draw.line(screen, GREEN, carBumperPos, endPos5, 1)
-        pg.draw.line(screen, GREEN, carBumperPos, endPos6, 1)
-        pg.draw.line(screen, GREEN, carBumperPos, endPos7, 1)
-        pg.draw.line(screen, GREEN, carBumperPos, endPos8, 1)
-        pg.draw.line(screen, GREEN, carBumperPos, endPos9, 1)
-    return [ leftDistance, leftDiagonalDistance, frontDistance, rightDiagonalDistance, rightDistance, left67Distance, right67Distance, left22Distance, right22Distance, car1.speed, direction, car1.abPedal, car1.stAngle ]
+    return [ *getNdistances(screen, car1, carSize, screenSize, n=9), car1.speed, direction, car1.abPedal, car1.stAngle ]
+
