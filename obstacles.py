@@ -66,6 +66,10 @@ def getNdistances(screen, car, carSize, screenSize, show=1, n=7):
 
     # if n is odd, it will contain the straight line else, it won't
     angles = (np.linspace(-90, 90, n) + car.dirAngle) % 360
+    #for older 7 feature models
+    # if n == 7:
+        # angles = (np.array([-90, -67.5, -45, 0, 45, 67.5, 90]) + car.dirAngle) % 360
+
     # with the angles, find the end position
     endPos = list(map(lambda angle: findObstacle(screen, carBumperPos, angle, screenSize), angles))
     # using the end position [nearest obstacle], calculate the distance
