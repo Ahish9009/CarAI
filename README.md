@@ -42,6 +42,19 @@
 	- Currently, linear regression using 5, 7 and 11 features has been tested out.
 	- The best performing model is the **11 features hybrid2** model.
 
+5. **Reinforcement Learning**
+
+	- Initialize **m** cars with random weights
+	- Set up a reward system that gives each car's performance reward points based on:
+		1. **Distance/amount of the track** it covers(not sure how to implement this without manual intervention) (d)
+		2. **Time** taken to do so(?)(t)
+	- Based on the above, a rough formula could be (d/t)
+	- Select the best **n** cars, ie. the ones with the most points
+	- Use these n cars weights to create mn cars having slight variants of the weights(changing the weights randomly up to a maximum of ẟ of the parent car
+	- Hopefully, this will lead to a car that can manuever around all the circuits
+	- Drawback: The entire process seems pretty random, especially the learning out of a parent car, there is essentially nothing the new car 'learns' from it's parent car, ie. the new car just changes the parent car by a bit **hoping** that it becomes better
+
+
 ## Plan
 
 - (**Done**) Deploy a method to get the necessary parameters for training
