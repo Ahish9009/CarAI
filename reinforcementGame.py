@@ -85,11 +85,13 @@ m = 600
 carsList = []
 
 #starting randomized values
-abPedalWeights = rf.getRandom(m, nFeatures, 6)
-stAngleWeights = rf.getRandom(m, nFeatures, 6)
+delta = 1
+abPedalWeights = rf.getRandom(m, nFeatures, delta)
+stAngleWeights = rf.getRandom(m, nFeatures, delta)
 
 #car objects list
 carsList = [cars(200,200) for i in range(m)]
+alive = [1 for i in range(m)]
 
 #car image
 orgCar = car
@@ -103,8 +105,15 @@ while looper:
     #blits images
     screen.blit(circuit, (0,0))
    
-    # print(carsList)
-    carsBlitList = list(map(lambda x, y: x if y else False, carsList, rf.getCrashStatus(carsList, screen, screenSize, carSize)))
+    #updates alive cars
+    newCrashed = rf.getCrashStatus(carsList, screen, screenSize, carSize)
+    alive = list(map(lambda x, new: 1 if x and (new) else 0, alive, newCrashed))
+    nAlive = alive.count(1)
+
+    aliveInfo = TNR30.render("Alive: "+str(nAlive), 1, BLACK)
+    screen.blit(aliveInfo, (0,30))
+
+    carsBlitList = list(map(lambda x, y: x if y else False, carsList,alive ))
 
     for currCar in filter(lambda x: x!=False, carsBlitList):
         car = pg.transform.rotate(car, currCar.dirAngle-90)
