@@ -81,7 +81,7 @@ looper = True
 count = 0
 
 #No. of cars to try
-m = 600
+m = 700
 carsList = []
 
 #starting randomized values
