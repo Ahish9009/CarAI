@@ -37,7 +37,7 @@ def isOnRoad(screen, screenSize, car, carSize):
     carCenterPos = getCenter(car, carSize)
     carBumperPos = getBumper(car, carSize, carCenterPos)
 
-    pos = list(map(round, carBumperPos))
+    pos = list(map(lambda x: int(round(x)), carBumperPos))
 
     if not isValid(pos, screenSize):
         return False
@@ -56,16 +56,17 @@ def isObstacle(color):
 def findObstacle(screen, start, angle, screenSize):
 
     currPos = [start[0], start[1]]
-    roundedCurrPos = [round(start[0]), round(start[1])]
+    roundedCurrPos = [int(round(start[0])), int(round(start[1]))]
     while isValid(currPos, screenSize):
-        
+       
         currCol = screen.get_at(roundedCurrPos)
+        
         if isObstacle(currCol):
             break
 
         currPos[0] += math.cos(math.radians(angle))
         currPos[1] -= math.sin(math.radians(angle))
-        roundedCurrPos = [ round(currPos[0]), round(currPos[1]) ]
+        roundedCurrPos = [ int(round(currPos[0])), int(round(currPos[1])) ]
     
     return currPos
 
@@ -79,9 +80,6 @@ def getNdistances(screen, car, carSize, screenSize, show=1, n=7):
 
     # if n is odd, it will contain the straight line else, it won't
     angles = (np.linspace(-90, 90, n) + car.dirAngle) % 360
-    #for older 7 feature models
-    # if n == 7:
-        # angles = (np.array([-90, -67.5, -45, 0, 45, 67.5, 90]) + car.dirAngle) % 360
 
     # with the angles, find the end position
     endPos = list(map(lambda angle: findObstacle(screen, carBumperPos, angle, screenSize), angles))
@@ -104,8 +102,8 @@ def get7Features(screen, car1, carSize, screenSize, show=1):
     return [ *getNdistances(screen, car1, carSize, screenSize, n=7), car1.speed, car1.abPedal, car1.stAngle ]
 
 
-def get11Features(screen, car1, carSize, screenSize, show=1):
-    direction = sgn(car1.dirAngle)
+def getFeatures(screen, car1, carSize, screenSize, nAngles=9, show=1):
+    # direction = sgn(car1.dirAngle)
 
-    return [ *getNdistances(screen, car1, carSize, screenSize, n=9), car1.speed, direction, car1.abPedal, car1.stAngle ]
+    return [ *getNdistances(screen, car1, carSize, screenSize, show, n=nAngles), car1.speed ]
 
