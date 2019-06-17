@@ -11,3 +11,5 @@ venv
 .training2.py.swp
 usedKeys
 .tfAutoPilot.py.swp
+.reinforcementFunctions.py.swp
+.reinforcementGame.py.swp
