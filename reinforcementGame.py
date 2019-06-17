@@ -106,7 +106,7 @@ while looper:
     screen.blit(circuit, (0,0))
    
     #updates alive cars
-    newCrashed = rf.getCrashStatus(carsList, screen, screenSize, carSize)
+    newCrashed = rf.getCrashStatus(carsList, screen, screenSize, carSize, alive)
     alive = list(map(lambda x, new: 1 if x and (new) else 0, alive, newCrashed))
     nAlive = alive.count(1)
 

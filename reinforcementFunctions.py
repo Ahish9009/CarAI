@@ -2,9 +2,9 @@ import obstacles as ob
 import numpy as np
 import pygame as pg
 
-def getCrashStatus(carsList, screen, screenSize, carSize):
+def getCrashStatus(carsList, screen, screenSize, carSize, alive):
     
-    return list(map(lambda currCar: ob.isOnRoad(screen, screenSize, currCar, carSize), carsList))
+    return list(map(lambda currCar, alive: ob.isOnRoad(screen, screenSize, currCar, carSize) if alive else True, carsList, alive))
 
 def getRandom(m, nFeatures, delta):
     

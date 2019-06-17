@@ -41,8 +41,11 @@ def isOnRoad(screen, screenSize, car, carSize):
 
     if not isValid(pos, screenSize):
         return False
-
-    color = screen.get_at(pos)
+    
+    try:
+        color = screen.get_at(pos)
+    except:
+        return False
 
     return not bool(isObstacle(color))
 
@@ -58,9 +61,12 @@ def findObstacle(screen, start, angle, screenSize):
     currPos = [start[0], start[1]]
     roundedCurrPos = [int(round(start[0])), int(round(start[1]))]
     while isValid(currPos, screenSize):
-       
-        currCol = screen.get_at(roundedCurrPos)
         
+        try:
+            currCol = screen.get_at(roundedCurrPos)
+        except:
+            break
+
         if isObstacle(currCol):
             break
 
