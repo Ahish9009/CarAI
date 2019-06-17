@@ -8,7 +8,7 @@ def getCrashStatus(carsList, screen, screenSize, carSize, alive):
 
 def getRandom(m, nFeatures, delta):
     
-    return (np.random.rand(m, nFeatures) - 0.5) * delta * 2
+    return (np.random.rand(m, nFeatures) - 0.5) * delta
 
 def getAllFeatures(carsList, screen, carSize, screenSize):
 
