@@ -6,6 +6,10 @@ def getCrashStatus(carsList, screen, screenSize, carSize, alive):
     
     return list(map(lambda currCar, alive: ob.isOnRoad(screen, screenSize, currCar, carSize) if alive else True, carsList, alive))
 
+def getNextRandom(weights, delta, m, nFeatures):
+    
+    return ((np.random.rand(m, nFeatures) - 0.5) * delta) + weights
+
 def getRandom(m, nFeatures, delta):
     
     return (np.random.rand(m, nFeatures) - 0.5) * delta

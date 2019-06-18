@@ -106,11 +106,36 @@ oldT = pg.time.get_ticks()
 
 autoPilot = True
 
+nGenerations = 0
+triggerNextGen = False
+
 while looper:
     
     #blits images
     screen.blit(circuit, (0,0))
-  
+ 
+    if triggerNextGen:
+
+        nGenerations += 1
+
+        carsList = [cars(200,200) for i in range(m)]
+        alive = [1 for i in range(m)]
+
+        leadAbPedalWeights = abPedalWeights[lead-1]
+        leadStAngleWeights = stAngleWeights[lead-1]
+        print(leadAbPedalWeights)
+        print(leadStAngleWeights)
+        print()
+
+        # nextDeltaAb = np.average(leadAbPedalWeights)
+        # nextDeltaSt = np.average(leadStAngleWeights)
+        nextDeltaAb = 0.2
+        nextDeltaSt = 0.2
+        abPedalWeights = rf.getNextRandom(leadAbPedalWeights, nextDeltaAb, m, nFeatures)
+        stAngleWeights = rf.getNextRandom(leadStAngleWeights, nextDeltaSt, m, nFeatures)
+
+        triggerNextGen = False
+
     if not autoPilot:
         info = list(map(lambda x, i: (x.distance,i), carsList, range(1,m+1)))
         info.sort(key=lambda x:x[0])
@@ -125,25 +150,26 @@ while looper:
             for i in stAngleWeights:
                 csvWriter.writerow(i)
 
-        input()
+        autoPilot = not autoPilot
         #----------------------------------------------------------------------
 
     if autoPilot:
         #updates alive cars
         newCrashed = rf.getCrashStatus(carsList, screen, screenSize, carSize, alive)
-        alive = list(map(lambda x, new: 1 if x and (new) else 0, alive, newCrashed))
+        alive = list(map(lambda x, new: 1 if x and new else 0, alive, newCrashed))
         nAlive = alive.count(1)
 
         #blits cars alive
         aliveInfo = TNR30.render("Alive: "+str(nAlive), 1, BLACK)
+        generationsInfo = TNR30.render("Generation: "+str(nGenerations), 1, BLACK)
         screen.blit(aliveInfo, (0,30))
+        screen.blit(generationsInfo, (0,65))
 
         #gets cars to show
         carsBlitList = list(map(lambda x, y: x if y else False, carsList, alive))
 
         for currCar in filter(lambda x: x!=False, carsBlitList):
             car = pg.transform.rotate(car, currCar.dirAngle-90)
-            # print(currCar.x, currCar.y)
             screen.blit(car, st.rotateCenter(currCar, car))
             car = orgCar #resets car image to original(continous rotation causes distortion)
         
@@ -166,6 +192,8 @@ while looper:
         if event.type == pg.KEYDOWN:
             if event.key == pg.K_a:
                 autoPilot = not autoPilot
+            if event.key == pg.K_n:
+                triggerNextGen = True
 
     #sets max framerate
     clock.tick(20)
