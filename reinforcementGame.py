@@ -10,15 +10,17 @@ import reinforcementFunctions as rf
 import math, csv
 
 pg.init()
-
 #-------------------------------------------
-# model = "tensorFlow"
-model = "test"
 nFeatures = 10
 #-------------------------------------------
-
 #global variables
 #--------------------------------------------
+#starting positions
+#circuit1 - 400,150
+#circuit2 - 50, 200
+#circuit3 - 50, 125 
+#circuit4 - 200,200
+startPos = [(400,150), (50,200), (50,125), (200,200)]
 
 #text
 TNR30 = pg.font.SysFont("Times New Roman", 30)
@@ -64,7 +66,7 @@ class cars:
 #loading the images
 car = pg.image.load("images/rfCar.png")
 leadingCar = pg.image.load("images/leadCar.png")
-circuit = pg.image.load("images/circuit4.png")
+circuit = pg.image.load("images/circuit3.png")
 
 #scaling the images
 circuit = pg.transform.scale(circuit, screenSize)
@@ -95,7 +97,7 @@ print()
 print(stAngleWeights)
 
 #car objects list
-carsList = [cars(200,200) for i in range(m)]
+carsList = [cars(50,125) for i in range(m)]
 alive = [1 for i in range(m)]
 
 #car image
@@ -168,6 +170,9 @@ while looper:
         #gets cars to show
         carsBlitList = list(map(lambda x, y: x if y else False, carsList, alive))
 
+        #gets new abPedal & stAngle for all cars
+        carsList = rf.driveAll(carsList, abPedalWeights, stAngleWeights, screen, carSize, screenSize)
+
         for currCar in filter(lambda x: x!=False, carsBlitList):
             car = pg.transform.rotate(car, currCar.dirAngle-90)
             screen.blit(car, st.rotateCenter(currCar, car))
@@ -183,8 +188,8 @@ while looper:
         screen.blit(leadingCar, st.rotateCenter(carsList[lead-1], leadingCar))
         leadingCar = orgLeadingCar
         
-        #gets new abPedal & stAngle for all cars
-        carsList = rf.driveAll(carsList, abPedalWeights, stAngleWeights, screen, carSize, screenSize)
+        # gets new abPedal & stAngle for all cars
+        # carsList = rf.driveAll(carsList, abPedalWeights, stAngleWeights, screen, carSize, screenSize)
     
     for event in pg.event.get():
         if event.type == pg.QUIT:
