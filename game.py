@@ -113,13 +113,13 @@ while looper:
 
     #collects all the features
     if collect:
-        features = ob.get11Features(screen, car1, carSize, screenSize)
+        features = ob.getFeatures(screen, car1, carSize, screenSize)
         allFeatures += [features]
     
     if autoPilot:
         
         if nFeatures == 11 or nFeatures == 31:
-            features = ob.get11Features(screen, car1, carSize, screenSize)
+            features = ob.getFeatures(screen, car1, carSize, screenSize)
 
             # added for model test
             _9distances = ob.getNdistances(screen, car1, carSize, screenSize, n=9)
