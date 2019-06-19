@@ -79,7 +79,7 @@ circuit4 = pg.transform.scale(circuit4, screenSize)
 car = pg.transform.scale(car, carSize)
 leadingCar = pg.transform.scale(leadingCar, carSize)
 
-currCircuit = 2
+currCircuit = 3
 circuits = [circuit1, circuit2, circuit3, circuit4]
 circuit = circuits[currCircuit]
 
@@ -95,10 +95,10 @@ looper = True
 count = 0
 
 #No. of cars to try
-m = 300
+m = 500
 
 #starting randomized values
-deltaAb = 0.05
+deltaAb = 0.1
 deltaSt = 0.5
 abPedalWeights = rf.getRandom(m, nFeatures, deltaAb)
 stAngleWeights = rf.getRandom(m, nFeatures, deltaSt)
@@ -205,7 +205,7 @@ while looper:
                 triggerNextGen = True
 
     #sets max framerate
-    clock.tick(20)
+    clock.tick(10)
 
     currT = pg.time.get_ticks()
     deltaT = (currT - oldT)/1000
@@ -220,5 +220,4 @@ while looper:
     pg.display.update()
 
 pg.quit()
-
 

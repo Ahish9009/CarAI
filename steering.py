@@ -23,9 +23,10 @@ def getAcDc(multiplier):
 def addSpeeds(a, b):
 
     toReturn = a + b
-    if toReturn > speedMAX:
-        return speedMAX
-    elif toReturn < 0:
+    #to set a limit on speed
+    # if toReturn > speedMAX:
+        # return speedMAX
+    if toReturn < 0:
         return 0
     else:
         return toReturn
