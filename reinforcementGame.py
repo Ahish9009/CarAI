@@ -79,7 +79,7 @@ circuit4 = pg.transform.scale(circuit4, screenSize)
 car = pg.transform.scale(car, carSize)
 leadingCar = pg.transform.scale(leadingCar, carSize)
 
-currCircuit = 0
+currCircuit = 2
 circuits = [circuit1, circuit2, circuit3, circuit4]
 circuit = circuits[currCircuit]
 
@@ -98,9 +98,10 @@ count = 0
 m = 300
 
 #starting randomized values
-delta = 0.5
-abPedalWeights = rf.getRandom(m, nFeatures, delta)
-stAngleWeights = rf.getRandom(m, nFeatures, delta)
+deltaAb = 0.05
+deltaSt = 0.5
+abPedalWeights = rf.getRandom(m, nFeatures, deltaAb)
+stAngleWeights = rf.getRandom(m, nFeatures, deltaSt)
 
 print(abPedalWeights)
 print()
@@ -145,29 +146,12 @@ while looper:
 
         # nextDeltaAb = np.average(leadAbPedalWeights)
         # nextDeltaSt = np.average(leadStAngleWeights)
-        nextDeltaAb = 0.2
-        nextDeltaSt = 0.2
+        nextDeltaAb = deltaAb*0.4
+        nextDeltaSt = deltaSt*0.4
         abPedalWeights = rf.getNextRandom(leadAbPedalWeights, nextDeltaAb, m, nFeatures)
         stAngleWeights = rf.getNextRandom(leadStAngleWeights, nextDeltaSt, m, nFeatures)
 
         triggerNextGen = False
-
-    if not autoPilot:
-        info = list(map(lambda x, i: (x.distance,i), carsList, range(1,m+1)))
-        info.sort(key=lambda x:x[0])
-        print(info)
-        with open("reinforcement/abWeights", "a", newline='') as f:
-            csvWriter = csv.writer(f, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-            for i in abPedalWeights:
-                csvWriter.writerow(i)
-
-        with open("reinforcement/stWeights", "a", newline='') as f:
-            csvWriter = csv.writer(f, delimiter = ',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-            for i in stAngleWeights:
-                csvWriter.writerow(i)
-
-        autoPilot = not autoPilot
-        #----------------------------------------------------------------------
 
     if autoPilot:
         #updates alive cars
@@ -196,6 +180,12 @@ while looper:
         info = list(map(lambda x, i: (x.distance,i), carsList, range(1,m+1)))
         info.sort(key=lambda x:x[0])
         lead = info[-1][1]
+        speedInfo = TNR30.render("Speed: "+str(carsList[lead-1].speed), 1, BLACK)
+        abInfo = TNR30.render("ab: "+str(carsList[lead-1].abPedal), 1, BLACK)
+        stInfo = TNR30.render("st: "+str(carsList[lead-1].stAngle), 1, BLACK)
+        screen.blit(speedInfo, (0,100))
+        screen.blit(abInfo, (0,135))
+        screen.blit(stInfo, (0,170))
 
         #blits leading car
         leadingCar = pg.transform.rotate(leadingCar, carsList[lead-1].dirAngle-90)
