@@ -66,12 +66,22 @@ class cars:
 #loading the images
 car = pg.image.load("images/rfCar.png")
 leadingCar = pg.image.load("images/leadCar.png")
-circuit = pg.image.load("images/circuit3.png")
+circuit1 = pg.image.load("images/circuit1.png")
+circuit2 = pg.image.load("images/circuit2.png")
+circuit3 = pg.image.load("images/circuit3.png")
+circuit4 = pg.image.load("images/circuit4.png")
 
 #scaling the images
-circuit = pg.transform.scale(circuit, screenSize)
+circuit1 = pg.transform.scale(circuit1, screenSize)
+circuit2 = pg.transform.scale(circuit2, screenSize)
+circuit3 = pg.transform.scale(circuit3, screenSize)
+circuit4 = pg.transform.scale(circuit4, screenSize)
 car = pg.transform.scale(car, carSize)
 leadingCar = pg.transform.scale(leadingCar, carSize)
+
+currCircuit = 0
+circuits = [circuit1, circuit2, circuit3, circuit4]
+circuit = circuits[currCircuit]
 
 #frame rate
 clock = pg.time.Clock()
@@ -97,7 +107,7 @@ print()
 print(stAngleWeights)
 
 #car objects list
-carsList = [cars(50,125) for i in range(m)]
+carsList = [cars(*startPos[currCircuit]) for i in range(m)]
 alive = [1 for i in range(m)]
 
 #car image
@@ -118,9 +128,13 @@ while looper:
  
     if triggerNextGen:
 
+        currCircuit = (currCircuit + 1) % 4
+        circuit = circuits[currCircuit]
+        screen.blit(circuit, (0,0))
+
         nGenerations += 1
 
-        carsList = [cars(200,200) for i in range(m)]
+        carsList = [cars(*startPos[currCircuit]) for i in range(m)]
         alive = [1 for i in range(m)]
 
         leadAbPedalWeights = abPedalWeights[lead-1]
