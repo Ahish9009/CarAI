@@ -15,17 +15,16 @@ def sgn(x):
     return x/abs(x)
 
 def getDistance(a, b):
-
     return math.sqrt( (a[0] - b[0])**2 + (a[1] - b[1])**2 )
 
 def getCenter(obj, size):
-
     return  obj.x + size[0]/2, obj.y + size[1]/2
 
 def getBumper(obj, size, center):
-  
-    # print( obj.dirAngle)
-    return center[0] + (size[1]/2)*math.cos(math.radians( obj.dirAngle)), center[1] - (size[1]/2)*math.sin(math.radians(obj.dirAngle))
+    return center[0] + (size[1]/2)*math.cos(math.radians(obj.dirAngle)), center[1] - (size[1]/2)*math.sin(math.radians(obj.dirAngle))
+
+def getSpoiler(obj, size, center):
+    return center[0] - (size[1]/2) * math.cos(math.radians(obj.dirAngle)), center[1] + (size[1]/2) * math.sin(math.radians(obj.dirAngle))
 
 def isValid(pos, maxS):
 
@@ -76,6 +75,24 @@ def findObstacle(screen, start, angle, screenSize):
     
     return currPos
 
+def getRoadOffset(screen, car, carSize, screenSize, show=1):
+    carCenterPos = getCenter(car, carSize)
+    carBumperPos = getBumper(car, carSize, carCenterPos)
+    carSpoilerPos = getSpoiler(car, carSize, carCenterPos)
+
+    angle = car.dirAngle + 90
+
+    topEndCoordinates = findObstacle(screen, carBumperPos, angle, screenSize)
+    bottomEndCoordinates = findObstacle(screen, carSpoilerPos, angle, screenSize)
+
+    topDist = getDistance(topEndCoordinates, carBumperPos)
+    bottomDist = getDistance(bottomEndCoordinates, carSpoilerPos)
+
+    if show:
+        pg.draw.line(screen, RED, carBumperPos, topEndCoordinates, 1)
+        pg.draw.line(screen, RED, carSpoilerPos, bottomEndCoordinates, 1)
+
+    offset = math.atan((bottomDist - topDist) / carSize[1])
 
 def getNdistances(screen, car, carSize, screenSize, show=1, n=7):
     carCenterPos = getCenter(car, carSize)

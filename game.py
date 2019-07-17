@@ -124,6 +124,8 @@ while looper:
             # added for model test
             _9distances = ob.getNdistances(screen, car1, carSize, screenSize, n=9)
             isOnRoad = ob.isOnRoad(screen, screenSize, car1, carSize)
+            offset = ob.getRoadOffset(screen, car1, carSize, screenSize)
+            screen.blit(TNR30.render("offset: " + str(offset), 1, BLACK), (0, 575))
 
             if model == "tensorFlow":
                 car1.abPedal, car1.stAngle = tfap.drive(features[:11])
