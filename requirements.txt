@@ -10,7 +10,7 @@ kiwisolver==1.1.0
 Markdown==3.1.1
 matplotlib==2.2.2
 mock==3.0.5
-numpy==1.16.3
+numpy==1.22.0
 pandas==0.23.3
 protobuf==3.8.0
 pygame==1.9.6
