@@ -1,5 +1,7 @@
 # CarAI
 
+![carai](https://github.com/user-attachments/assets/869f2b2c-397e-44bb-a9dd-64fe857cf61e)
+
 ## Metadata
 
  1. **Circuit**
